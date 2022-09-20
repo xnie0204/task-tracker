@@ -1,18 +1,23 @@
 import Header from './components/Header'
 import { BrowserRouter as Router, Route,Routes} from 'react-router-dom'
 import Tasks from './components/Tasks';
-import { useState,useEffect } from "react"
+import { useState,useEffect, createContext } from "react"
 import Footer from './components/Footer'
 import About from './components/About'
 import AddTask from './components/AddTask';
+import ReactSwitch from 'react-switch';
+
+export const ThemeContext = createContext(null);
 
 function App() {
    // display the addTasks components
    const [showAddTasks,setShowAddTasks] = useState(false)
 
-
    //setTasks is used to change tasks
    const [tasks, setTasks] = useState([])
+
+   //determine the light mode or dark mode
+   const [theme,setTheme] = useState("light")
 
    //Add Tasks
    const addTask = async (task) => {
@@ -93,12 +98,20 @@ function App() {
     return data
 }
 
+//change the theme
+const toggleTheme = () => {
+  setTheme((curr) => (curr === "light" ? "dark" : "light"));
+}
+
 
   return (
+    <ThemeContext.Provider value = {{theme, toggleTheme}}>
     <Router>
+    <div className='APP' id = {theme}>
     <div className="container">
       <Header onAdd={() => setShowAddTasks(!showAddTasks)}
-              showAdd = {showAddTasks}/>
+              showAdd = {showAddTasks}
+              theme = {theme}/>
        
        <Routes>
        <Route path='/' element = {
@@ -111,15 +124,25 @@ function App() {
       {tasks.length>0 ?
       <Tasks tasks={tasks}
             onDelete={deleteTask}
-            onToggle = {toggleReminder}/> : ('No Tasks to show')}
+            onToggle = {toggleReminder}
+            passTheme = {theme} /> : ('No Tasks to show')}
+            
 
         </>
        } />
+       
        <Route path='/about' element={<About />}/>
        </Routes>
+       <div className='switch'>
+        <label>{theme === 'light' ? "Light Mode": "Dark Mode"}</label>
+       <ReactSwitch onChange = {toggleTheme} checked = {theme === 'dark'}/>
+       </div>
        <Footer/>
     </div>
+    </div>
     </Router>
+    
+    </ThemeContext.Provider>
   );
 }
 

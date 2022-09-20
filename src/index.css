@@ -11,13 +11,23 @@ body {
 }
 
 .container {
-  max-width: 500px;
+  width: 500px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
-  border: 1px solid steelblue;
+  /* border: 1px solid black; */
   padding: 30px;
   border-radius: 5px;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+}
+
+#light .container {
+  background-color: #fff;
+}
+
+#dark .container {
+  background-color: #101918;
 }
 
 .header {
@@ -59,6 +69,12 @@ body {
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
+
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
 }
 
 .task.reminder {
@@ -109,4 +125,38 @@ body {
 footer {
   margin-top: 30px;
   text-align: center;
+}
+
+#light {
+  background-color: #fff;
+}
+
+#dark {
+  background-color: #080C0C;
+}
+
+.APP {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.switch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.switch label{
+  margin: 10px
+}
+
+#light .switch label {
+  color: black;
+}
+
+#dark .switch label {
+  color: white;
 }

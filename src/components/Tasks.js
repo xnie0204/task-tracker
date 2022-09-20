@@ -1,8 +1,9 @@
 
 import Task from './Task'
-const Tasks = ({tasks, onDelete, onToggle}) => {
+const Tasks = ({tasks, onDelete, onToggle,passTheme}) => {
 
   return (
+    console.log(passTheme),
   
     <>
     {
@@ -11,7 +12,10 @@ const Tasks = ({tasks, onDelete, onToggle}) => {
         <Task key = {index} 
               task = {task} 
               onDelete = {onDelete}
-              onToggle = {onToggle}/>
+              onToggle = {onToggle}
+              passTheme = {passTheme}
+              
+              />
       ))
     }
 
